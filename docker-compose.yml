@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  postgres-database:
+    image: postgres:14.5-alpine
+    environment:
+      - POSTGRES_USER=shinyproxy
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 1s
+      timeout: 1s
+      retries: 10
+  shinyproxy:
+    image: scaledbi-shinyproxy:latest
+    user: shinyproxy
+    hostname: shinyproxy
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+    ports:
+      - "8080:8080"
+    networks:
+      - shinyproxy-network
+    depends_on:
+      postgres-database:
+        condition: service_healthy
+networks:
+    shinyproxy-network:
+      name: shinyproxy-network
+      ipam:
+        config:
+          - subnet: 192.168.11.0/24
