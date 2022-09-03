@@ -1,0 +1,34 @@
+# based on https://github.com/openanalytics/shinyproxy-demo/blob/master/application.yml
+proxy:
+  title: ScaledBI
+  logo-url: https://www.openanalytics.eu/shinyproxy/logo.png
+  landing-page: /
+  heartbeat-rate: 10000
+  heartbeat-timeout: 60000
+  port: 8080
+  authentication: simple
+  admin-groups: admin
+  users:
+  - name: admin
+    password: password
+    groups: admin
+  - name: crm
+    password: password
+    groups: crm
+  specs:
+  - id: ide_rstudio
+    display-name: RStudio
+    description: RStudio
+    container-cmd: ["R", "-e", "shinyproxy::run_01_hello()"]
+    container-image: openanalytics/shinyproxy-demo
+  - id: ide_zeppelin
+    display-name: Apache Zeppelin
+    description: Apache Zeppelin
+    container-cmd: ["R", "-e", "shinyproxy::run_06_tabsets()"]
+    container-image: openanalytics/shinyproxy-demo
+#  usage-stats-url: jdbc:postgresql://localhost/postgres
+#  usage-stats-username: "${POSTGRES_USERNAME}"
+#  usage-stats-password: "${POSTGRES_PASSWORD}"
+logging:
+  file:
+    name: shinyproxy.log
