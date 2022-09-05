@@ -19,10 +19,23 @@ proxy:
     password: password
     groups: crm
   specs:
-  - id: ide_rstudio
+  - id: ide_rstudio # https://github.com/ScaledBI/shinyproxy-rstudio-ide-demo
     display-name: RStudio
     description: RStudio
+    container-image: openanalytics/shinyproxy-rstudio-ide-demo:2021.09.2_382__4.1.2
+    container-env:
+      DISABLE_AUTH: true
+      WWW_ROOT_PATH: "#{proxy.getRuntimeValue('SHINYPROXY_PUBLIC_PATH')}"
+    port: 8787
+    container-network: shinyproxy-network
+  - id: 01_hello
+    display-name: Hello Application
+    description: Application which demonstrates the basics of a Shiny app
     container-cmd: ["R", "-e", "shinyproxy::run_01_hello()"]
+    container-image: openanalytics/shinyproxy-demo
+    container-network: shinyproxy-network
+  - id: 06_tabsets
+    container-cmd: ["R", "-e", "shinyproxy::run_06_tabsets()"]
     container-image: openanalytics/shinyproxy-demo
     container-network: shinyproxy-network
   - id: ide_zeppelin
