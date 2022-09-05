@@ -5,7 +5,10 @@ proxy:
   landing-page: /
   heartbeat-rate: 10000
   heartbeat-timeout: 60000
+  container-wait-time: 30000
   port: 8080
+  docker:
+    internal-networking: true
   authentication: simple
   admin-groups: admin
   users:
@@ -21,11 +24,21 @@ proxy:
     description: RStudio
     container-cmd: ["R", "-e", "shinyproxy::run_01_hello()"]
     container-image: openanalytics/shinyproxy-demo
+    container-network: shinyproxy-network
   - id: ide_zeppelin
     display-name: Apache Zeppelin
     description: Apache Zeppelin
     container-cmd: ["R", "-e", "shinyproxy::run_06_tabsets()"]
     container-image: openanalytics/shinyproxy-demo
+    container-network: shinyproxy-network
+  - id: db_tableau
+    display-name: Tableau Example
+    description: "Tableau Example: Public Dashboard Project Management Summary"
+    container-image: scaledbi-demo-tableau:latest
+    container-env:
+      DASHBOARD: PROJECTMANAGEMENTDASHBAORD/PROJECTMANAGEMENTSUMMARY
+    port: 80
+    container-network: shinyproxy-network
   usage-stats-url: jdbc:postgresql://192.168.11.2/db
   usage-stats-username: shinyproxy # "${POSTGRES_USERNAME}"
   usage-stats-password: password # "${POSTGRES_PASSWORD}"

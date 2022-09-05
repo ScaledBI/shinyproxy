@@ -28,7 +28,7 @@ services:
 
   shinyproxy:
     image: scaledbi-shinyproxy:latest
-    user: shinyproxy
+    user: root
     hostname: shinyproxy
     restart: unless-stopped
     volumes:

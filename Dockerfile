@@ -9,9 +9,6 @@ RUN wget -qO "shinyproxy.jar" "https://github.com/openanalytics/shinyproxy/relea
 
 FROM openjdk:11-jre-slim-bullseye
 
-RUN groupadd -r shinyproxy && useradd --no-log-init -r -g shinyproxy shinyproxy
-USER shinyproxy
-
 # copy shinyproxy
 COPY --from=downloader shinyproxy.jar ./
 
