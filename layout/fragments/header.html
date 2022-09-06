@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	...
+</head>
+
+<body>
+	<div class="navbar navbar-inverse sticky-top" th:fragment="header">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<img class="navbar-brand" style="margin-left: 80px; padding: 0px 0px" th:src="${logo}" width="100px" />
+				<a class="navbar-brand" th:href="@{/}" th:alt="${title}"></a>
+			</div>
+			<!--
+                <ul class="nav navbar-nav">
+                    <li th:classappend="${module == 'home' ? 'active' : ''}">
+                        <a href="#" th:href="@{/}">Home</a>
+                    </li>
+                    <li th:classappend="${module == 'tasks' ? 'active' : ''}">
+                        <a href="#" th:href="@{/task}">Tasks</a>
+                    </li>
+                </ul>
+            -->
+			<div class="navbar-collapse collapse" style="margin-right: 70px;">
+				<ul class="nav navbar-nav navbar-right">
+					<li th:if="${#authorization.expression('!isAuthenticated()')}">
+						<a href="/signin" th:href="@{/signin}">
+							<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
+						</a>
+					</li>
+					<li th:if="${#authorization.expression('isAuthenticated()')}">
+						<a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+							<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
+						</a>
+						<form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}">
+						</form>
+					</li>
+				</ul>
+				<div class="navbar-right" sec:authorize="isAuthenticated()">
+					<span class="navbar-text">
+						<span class="glyphicon glyphicon-user"></span>
+						<span sec:authentication="name"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
