@@ -21,12 +21,15 @@ proxy:
     groups: crm
   specs:
   - id: ide_rstudio
-    display-name: RStudio
-    description: RStudio
+    display-name: RStudio IDE
+    description: RStudio IDE
     template-properties:
         tags: ide secondExampleTag
-    container-cmd: ["R", "-e", "shinyproxy::run_01_hello()"]
-    container-image: openanalytics/shinyproxy-demo
+    container-image: openanalytics/shinyproxy-rstudio-ide-demo:2021.09.2_382__4.1.2
+    container-env:
+      DISABLE_AUTH: true
+      WWW_ROOT_PATH: "#{proxy.getRuntimeValue('SHINYPROXY_PUBLIC_PATH')}"
+    port: 8787
     container-network: shinyproxy-network
   - id: db_rmarkdowns
     display-name: RMarkdowns
@@ -36,16 +39,33 @@ proxy:
     container-image: demo_r_project:latest
     container-cmd: ["R", "-e", "rmarkdown::run('inst/markdowns/demo_example.Rmd', shiny_args=list(port=3838, host='0.0.0.0'))"] 
     container-network: shinyproxy-network
+  - id: ide_zeppelin
+    display-name: Apache Zeppelin IDE
+    description: "Apache Zeppelin Notebooks"
+    template-properties:
+        tags: ide thirdExampleTag
+    container-image: scaledbi-demo-zeppelin:latest
+    container-network: shinyproxy-network
+    port: 8080
   - id: db_shiny
-    display-name: RShiny
+    display-name: RShiny Demo
     description: You can render RShiny dashboards easily
     template-properties:
         tags: db
     container-cmd: ["R", "-e", "shinyproxy::run_01_hello()"]
     container-image: openanalytics/shinyproxy-demo
     container-network: shinyproxy-network
+  - id: db_jupyter
+    display-name: Jupyter Demo
+    description: "Example Jupyter Notebook"
+    template-properties:
+        tags: db
+    container-image: scaledbi-demo-jupyter:latest
+    container-cmd: ["./start-notebook-as-html.sh", "notebooks/demo.ipynb"]
+    port: 8000
+    container-network: shinyproxy-network
   - id: db_tableau
-    display-name: Tableau Example
+    display-name: Tableau Demo
     description: "Public Dashboard Project Management Summary"
     template-properties:
         tags: db
