@@ -8,9 +8,9 @@
 <body>
 	<div class="navbar navbar-inverse sticky-top" th:fragment="header">
 		<div class="container-fluid">
-			<div class="navbar-header">
-				<img class="navbar-brand" style="margin-left: 80px; padding: 0px 0px" th:src="${logo}" width="100px" />
-				<a class="navbar-brand" th:href="@{/}" th:alt="${title}"></a>
+			<div class="navbar-header" style="margin-left: 85px;">
+				<img class="navbar-brand" th:src="${logo}" />
+				<a class="navbar-brand" th:href="@{/}" th:text="${title}"></a>
 			</div>
 			<!--
                 <ul class="nav navbar-nav">
