@@ -1,7 +1,8 @@
 # based on https://github.com/openanalytics/shinyproxy-demo/blob/master/application.yml
 proxy:
-  title: ScaledBI
+  title: Open Analytics Shiny Proxy
   logo-url: https://www.openanalytics.eu/shinyproxy/logo.png
+  template-path: ./layout/1col
   landing-page: /
   heartbeat-rate: 10000
   heartbeat-timeout: 60000
