@@ -25,8 +25,11 @@ proxy:
     description: RStudio
     template-properties:
         tags: ide secondExampleTag
-    container-cmd: ["R", "-e", "shinyproxy::run_01_hello()"]
-    container-image: openanalytics/shinyproxy-demo
+    container-image: openanalytics/shinyproxy-rstudio-ide-demo:2021.09.2_382__4.1.2
+    container-env:
+      DISABLE_AUTH: true
+      WWW_ROOT_PATH: "#{proxy.getRuntimeValue('SHINYPROXY_PUBLIC_PATH')}"
+    port: 8787
     container-network: shinyproxy-network
   - id: db_rmarkdowns
     display-name: RMarkdowns
