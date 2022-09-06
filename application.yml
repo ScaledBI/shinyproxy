@@ -20,20 +20,24 @@ proxy:
     password: password
     groups: crm
   specs:
+  - id: db_rmarkdowns
+    display-name: RMarkdowns
+    description: You can render RMarkdowns reports easily
+    container-image: demo_r_project:latest
+    container-cmd: ["R", "-e", "rmarkdown::run('inst/markdowns/demo_example.Rmd', shiny_args=list(port=3838, host='0.0.0.0'))"] 
+    container-network: shinyproxy-network
+  - id: db_shiny
+    display-name: RShiny
+    description: You can render RShiny dashboards easily
+    container-cmd: ["R", "-e", "shinyproxy::run_01_hello()"]
+    container-image: openanalytics/shinyproxy-demo
+    container-network: shinyproxy-network
   - id: ide_rstudio
     display-name: RStudio
     description: RStudio
     template-properties:
         tags: ide secondExampleTag
     container-cmd: ["R", "-e", "shinyproxy::run_01_hello()"]
-    container-image: openanalytics/shinyproxy-demo
-    container-network: shinyproxy-network
-  - id: ide_zeppelin
-    display-name: Apache Zeppelin
-    description: Apache Zeppelin
-    template-properties:
-        tags: ide
-    container-cmd: ["R", "-e", "shinyproxy::run_06_tabsets()"]
     container-image: openanalytics/shinyproxy-demo
     container-network: shinyproxy-network
   - id: db_tableau
