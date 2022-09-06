@@ -40,10 +40,10 @@ proxy:
     container-network: shinyproxy-network
   - id: ide_zeppelin
     display-name: Apache Zeppelin
-    description: Apache Zeppelin
-    container-cmd: ["R", "-e", "shinyproxy::run_06_tabsets()"]
-    container-image: openanalytics/shinyproxy-demo
+    description: "Apache Zeppelin Notebooks"
+    container-image: scaledbi-demo-zeppelin:latest
     container-network: shinyproxy-network
+    port: 8080
   - id: db_tableau
     display-name: Tableau Example
     description: "Tableau Example: Public Dashboard Project Management Summary"
