@@ -28,16 +28,6 @@ proxy:
       WWW_ROOT_PATH: "#{proxy.getRuntimeValue('SHINYPROXY_PUBLIC_PATH')}"
     port: 8787
     container-network: shinyproxy-network
-  - id: 01_hello
-    display-name: Hello Application
-    description: Application which demonstrates the basics of a Shiny app
-    container-cmd: ["R", "-e", "shinyproxy::run_01_hello()"]
-    container-image: openanalytics/shinyproxy-demo
-    container-network: shinyproxy-network
-  - id: 06_tabsets
-    container-cmd: ["R", "-e", "shinyproxy::run_06_tabsets()"]
-    container-image: openanalytics/shinyproxy-demo
-    container-network: shinyproxy-network
   - id: ide_zeppelin
     display-name: Apache Zeppelin
     description: "Apache Zeppelin Notebooks"
