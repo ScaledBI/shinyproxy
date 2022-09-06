@@ -1,2 +1,5 @@
 # ide stuff
 .idea/
+
+# macOS
+.DS_Store

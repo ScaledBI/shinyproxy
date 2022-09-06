@@ -15,5 +15,8 @@ COPY --from=downloader shinyproxy.jar ./
 # copy entrypoint and config
 COPY entrypoint.sh application.yml ./
 
+# copy templates
+COPY application.yml /layout /layout/
+
 EXPOSE 8443
 ENTRYPOINT "./entrypoint.sh"

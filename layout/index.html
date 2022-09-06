@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head lang="en">
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- load fonts from google -->
+    <link
+        href="http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700%7CRoboto:400,500,700%7CRoboto+Condensed%7CLato:400,700"
+        rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" media="screen" th:href="@{${bootstrapCss}}" />
+
+    <!-- Jquery + Bootstrap-->
+    <script th:src="@{${jqueryJs}}"></script>
+    <script th:src="@{${bootstrapJs}}"></script>
+
+    <!-- load css for cubeportfolio -->
+    <link rel="stylesheet" type="text/css" href="assets/css/cubeportfolio.min.css">
+</head>
+
+<body>
+    <!-- navigation bar -->
+    <div th:replace="fragments/header:: header"></div>
+    <div style="max-width: 100%; margin: 100px;">
+        <div class="clearfix">
+            <!--  Drop-Down Menue.
+            <div id="js-filters-lightbox-gallery1" class="cbp-l-filters-dropdown cbp-l-filters-dropdown-floated">
+                <div class="cbp-l-filters-dropdownWrap">
+                    <div class="cbp-l-filters-dropdownHeader">Sort Gallery</div>
+                    <div class="cbp-l-filters-dropdownList">
+                        <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">All</div>
+                        <div data-filter=".identity" class="cbp-filter-item">Identity</div>
+                        <div data-filter=".web-design" class="cbp-filter-item">Web Design</div>
+                        <div data-filter=".print" class="cbp-filter-item">Print</div>
+                    </div>
+                </div>
+            </div>
+            -->
+
+            <div id="js-filters-lightbox-gallery2" class="cbp-l-filters-button cbp-l-filters-left">
+                <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">All <div class="cbp-filter-counter">
+                    </div>
+                </div>
+                <div data-filter=".ide" class="cbp-filter-item">IDEs<div class="cbp-filter-counter"></div>
+                </div>
+                <div data-filter=".db" class="cbp-filter-item">Dashboards<div class="cbp-filter-counter"></div>
+                </div>
+                <div data-filter=".tutorial" class="cbp-filter-item">Tutorials<div class="cbp-filter-counter"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="js-grid-lightbox-gallery" class="cbp">
+            <div class="cbp-item" th:each="app: ${apps}"
+                th:classappend="${@thymeleaf.getTemplateProperty(app.id, 'tags')}">
+                <a th:href="@{/app/}+${app.id}" target="_blank" class="cbp-caption" rel="nofollow">
+                    <div class=" cbp-caption-defaultWrap">
+                        <img th:src="@{/assets/img/{name}.png(name=${app.id})}" alt="">
+                    </div>
+                    <div class="cbp-caption-activeWrap">
+                        <div class="cbp-l-caption-alignLeft">
+                            <div class="cbp-l-caption-body">
+                                <div class="cbp-l-caption-title" th:text="${app.displayName}"></div>
+                                <div class="cbp-l-caption-desc" th:text="${app.description}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div id="js-loadMore-lightbox-gallery" class="cbp-l-loadMore-button">
+            <a href="fragments/loadMore.html" class="cbp-l-loadMore-link" rel="nofollow">
+                <span class="cbp-l-loadMore-defaultText">LOAD MORE</span>
+                <span class="cbp-l-loadMore-loadingText">LOADING...</span>
+                <span class="cbp-l-loadMore-noMoreLoading">NO MORE WORKS</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- load jquery -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <!-- load cubeportfolio -->
+    <script type="text/javascript" src="assets/js/jquery.cubeportfolio.min.js"></script>
+
+    <!-- init cubeportfolio -->
+    <script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+
+</html>
