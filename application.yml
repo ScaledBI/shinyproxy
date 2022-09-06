@@ -52,6 +52,13 @@ proxy:
       DASHBOARD: PROJECTMANAGEMENTDASHBAORD/PROJECTMANAGEMENTSUMMARY
     port: 80
     container-network: shinyproxy-network
+  - id: db_jupyter
+    display-name: Jupyter Demo
+    description: "Example Jupyter Notebook"
+    container-image: scaledbi-demo-jupyter:latest
+    container-cmd: ["./start-notebook-as-html.sh", "notebooks/demo.ipynb"]
+    port: 8000
+    container-network: shinyproxy-network
   usage-stats-url: jdbc:postgresql://192.168.11.2/db
   usage-stats-username: shinyproxy # "${POSTGRES_USERNAME}"
   usage-stats-password: password # "${POSTGRES_PASSWORD}"
