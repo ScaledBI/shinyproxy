@@ -74,6 +74,16 @@ proxy:
       DASHBOARD: PROJECTMANAGEMENTDASHBAORD/PROJECTMANAGEMENTSUMMARY
     port: 80
     container-network: shinyproxy-network
+  - id: tutorial_booking
+    display-name: Tutorial Booking Table
+    description: "Tutorial Booking Table"
+    template-properties:
+      tags: tutorial
+    container-image: scaledbi-demo-zeppelin:latest
+    container-env:
+      ZEPPELIN_NOTEBOOK_HOMESCREEN: "Tutorial-Booking-Table"
+    port: 80
+    container-network: shinyproxy-network
   usage-stats-url: jdbc:postgresql://192.168.11.2/db
   usage-stats-username: shinyproxy # "${POSTGRES_USERNAME}"
   usage-stats-password: password # "${POSTGRES_PASSWORD}"
